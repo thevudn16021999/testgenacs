@@ -1,0 +1,199 @@
+<p-toast></p-toast>
+<div class="card">
+    <div class="container">
+        <div class="flex row">
+            <div class="flex-1">
+                <h3>Device Management</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="flex row margin-bottom-20">
+            <div class="flex-2">
+                <button
+                    pButton
+                    type="button"
+                    class="button m2 p-button-approve-all"
+                    (click)="onExportBtnClicked()"
+                >
+                    <span
+                        class="pi pi-download p-button-icon p-button-icon-left ng-star-inserted"
+                    ></span>
+                    Export
+                </button>
+            </div>
+            <div class="flex-auto text-right">
+                <span class="p-input-icon-right search"
+                    ><input
+                        #searchInput
+                        type="search"
+                        (keyup)="onSearchTermChanged($event)"
+                        pinputtext=""
+                        placeholder="Search"
+                        class="p-search p-inputtext p-component p-element" /><i
+                        class="pi pi-search"
+                    ></i
+                ></span>
+            </div>
+        </div>
+    </div>
+    <p-table
+        [lazy]="true"
+        (onLazyLoad)="nextPage($event)"
+        [totalRecords]="paginationData.Total"
+        [value]="paginationData.Items"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [paginator]="true"
+        [rows]="10"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[
+            10, 25, 50, 100, 200, 500, 1000, 2000, 5000, 10000
+        ]"
+        sortMode="multiple"
+        [customSort]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    >
+        <ng-template pTemplate="header">
+            <tr class="upper-case">
+                <th pSortableColumn="DeviceID.SerialNumber">
+                    Serial Number
+                    <p-sortIcon field="DeviceID.SerialNumber"></p-sortIcon>
+                </th>
+                <th pSortableColumn="DeviceID.ProductClass">
+                    Product Class
+                    <p-sortIcon field="DeviceID.ProductClass"></p-sortIcon>
+                </th>
+                <th pSortableColumn="VirtualParameters.SoftwareVersion">
+                    Software Version
+                    <p-sortIcon
+                        field="VirtualParameters.SoftwareVersion"
+                    ></p-sortIcon>
+                </th>
+                <th pSortableColumn="VirtualParameters.IPV4Address">
+                    IP
+                    <p-sortIcon
+                        field="VirtualParameters.IPV4Address"
+                    ></p-sortIcon>
+                </th>
+                <th pSortableColumn="VirtualParameters.OUI">
+                    OUI <p-sortIcon field="VirtualParameters.OUI"></p-sortIcon>
+                </th>
+                <th pSortableColumn="VirtualParameters.SSID24G">
+                    SSID 2.4G
+                    <p-sortIcon field="VirtualParameters.SSID24G"></p-sortIcon>
+                </th>
+                <th pSortableColumn="VirtualParameters.SSID5G">
+                    SSID 5G
+                    <p-sortIcon field="VirtualParameters.SSID5G"></p-sortIcon>
+                </th>
+                <th pSortableColumn="VirtualParameters.PPPoEACName">
+                    PPPOE User
+                    <p-sortIcon
+                        field="VirtualParameters.PPPoEACName"
+                    ></p-sortIcon>
+                </th>
+                <th pSortableColumn="Events.Inform">
+                    Last Inform <p-sortIcon field="Events.Inform"></p-sortIcon>
+                </th>
+                <th>Tags</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-ri="rowIndex">
+            <tr>
+                <td>
+                    {{ getValue(item["DeviceID.SerialNumber"], "value[0]") }}
+                </td>
+                <td>
+                    {{ getValue(item["DeviceID.ProductClass"], "value[0]") }}
+                </td>
+                <td>
+                    {{
+                        getValue(
+                            item["VirtualParameters.SoftwareVersion"],
+                            "value[0]"
+                        )
+                    }}
+                </td>
+                <td>
+                    {{
+                        getValue(
+                            item["VirtualParameters.IPV4Address"],
+                            "value[0]"
+                        )
+                    }}
+                </td>
+                <td>
+                    {{ getValue(item["VirtualParameters.OUI"], "value[0]") }}
+                </td>
+                <td>
+                    {{
+                        getValue(item["VirtualParameters.SSID24G"], "value[0]")
+                    }}
+                </td>
+                <td>
+                    {{ getValue(item["VirtualParameters.SSID5G"], "value[0]") }}
+                </td>
+                <td>
+                    {{
+                        getValue(
+                            item["VirtualParameters.PPPoEACName"],
+                            "value[0]"
+                        )
+                    }}
+                </td>
+                <td>
+                    <svg
+                        width="1em"
+                        height="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                        <circle
+                            cx="0.5em"
+                            cy="0.5em"
+                            r="0.4em"
+                            [attr.fill]="getStatusColor(item)"
+                        ></circle>
+                    </svg>
+                    <span
+                        >(
+                        {{
+                            getValue(item["Events.Inform"], "value[0]")
+                                | dateTimeAsAgo
+                        }})</span
+                    >
+                </td>
+                <td>
+                    <p-chip
+                        *ngFor="let tag of item.TagPlainValues"
+                        [label]="tag"
+                    ></p-chip>
+                </td>
+                <td>
+                    <div
+                        class="flex align-items-center justify-content-center gap-2"
+                    >
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-eye"
+                            (click)="onRowEdit(item)"
+                            class="p-button-text p-button-lg"
+                        ></button>
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            (click)="onRawDetailClicked(item)"
+                            class="p-button-text p-button-lg"
+                        >
+                            raw
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

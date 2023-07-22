@@ -1,0 +1,124 @@
+<p-toast></p-toast>
+<div class="card">
+    <div class="container">
+        <div class="flex row">
+            <div class="flex-1">
+                <h3>Permissions</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="flex row margin-bottom-20">
+            <div class="flex-2">
+                <button
+                    #addNewBtn
+                    pButton
+                    type="button"
+                    class="button m2 p-button-approve-all"
+                    (click)="onAddNewButtonClicked($event)"
+                >
+                    <span
+                        class="pi pi-microsoft p-button-icon p-button-icon-left ng-star-inserted"
+                    ></span>
+                    Add New
+                </button>
+            </div>
+            <!-- <div class="flex-auto text-right">
+                <span class="p-input-icon-right search"
+                    ><input
+                        #searchInput
+                        type="search"
+                        [(ngModel)]="searchTerm"
+                        pinputtext=""
+                        placeholder="Search"
+                        class="p-search p-inputtext p-component p-element" /><i
+                        class="pi pi-search"
+                    ></i
+                ></span>
+            </div> -->
+        </div>
+    </div>
+    <p-table
+        [lazy]="true"
+        (onLazyLoad)="nextPage($event)"
+        [totalRecords]="paginationData.Total"
+        [value]="paginationData.Items"
+        (sortFunction)="customSort($event)"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [paginator]="true"
+        [rows]="10"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        sortMode="multiple"
+        [customSort]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    >
+        <ng-template pTemplate="header">
+            <tr class="upper-case">
+                <th pSortableColumn="role">
+                    Role
+                    <p-sortIcon field="role"></p-sortIcon>
+                </th>
+                <th pSortableColumn="resource">
+                    Resource
+                    <p-sortIcon field="resource"></p-sortIcon>
+                </th>
+                <th pSortableColumn="access">
+                    Access
+                    <p-sortIcon field="access"></p-sortIcon>
+                </th>
+                <th pSortableColumn="filter">
+                    Filter
+                    <p-sortIcon field="filter"></p-sortIcon>
+                </th>
+                <th pSortableColumn="validate">
+                    Validate
+                    <p-sortIcon field="validate"></p-sortIcon>
+                </th>
+                <th>API</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-ri="rowIndex">
+            <tr>
+                <td>
+                    {{ item.role }}
+                </td>
+                <td>
+                    {{ item.resource }}
+                </td>
+                <td>
+                    {{ AccessNameLookup[item.access || ""] }}
+                </td>
+                <td>
+                    {{ item.filter }}
+                </td>
+                <td>
+                    {{ item.validate }}
+                </td>
+                <td>
+                    <p-checkbox
+                        [(ngModel)]="item.isApi"
+                        [binary]="true"
+                        [disabled]="true"
+                    ></p-checkbox>
+                </td>
+                <td>
+                    <div
+                        class="flex align-items-center justify-content-center gap-2"
+                    >
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-trash"
+                            (click)="onRowDelete(item)"
+                            class="p-button-text p-button-danger p-button-lg p-button-delete"
+                        ></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-confirmDialog [style]="{ width: '50vw' }" appendTo="body"></p-confirmDialog>

@@ -1,0 +1,111 @@
+<div class="col-12">
+    <div class="card">
+        <form [formGroup]="formGroup" (ngSubmit)="onSaveBtnClicked($event)">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                    <label>File Type</label>
+                    <!-- <input formControlName="fileType" pInputText type="text" /> -->
+                    <p-autoComplete
+                        formControlName="fileType"
+                        [suggestions]="filteredFileTypes"
+                        (completeMethod)="onFileTypesSearch($event)"
+                    ></p-autoComplete>
+                    <small
+                        *ngIf="
+                            formGroup.get('fileType')?.errors &&
+                            formGroup.get('fileType')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                    <label>OUI</label>
+                    <input formControlName="oui" pInputText type="text" />
+                    <small
+                        *ngIf="
+                            formGroup.get('oui')?.errors &&
+                            formGroup.get('oui')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                    <label>Product Class</label>
+                    <input
+                        formControlName="productClass"
+                        pInputText
+                        type="text"
+                    />
+                    <small
+                        *ngIf="
+                            formGroup.get('productClass')?.errors &&
+                            formGroup.get('productClass')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                    <label>Version</label>
+                    <input formControlName="version" pInputText type="text" />
+                    <small
+                        *ngIf="
+                            formGroup.get('version')?.errors &&
+                            formGroup.get('version')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-12">
+                    <label *ngIf="formGroup.get('file')?.value">{{
+                        formGroup.get("file")?.value.name
+                    }}</label>
+                    <p-fileUpload
+                        mode="basic"
+                        chooseLabel="Choose"
+                        name="file[]"
+                        [auto]="true"
+                        [customUpload]="true"
+                        (uploadHandler)="onFileUpload($event)"
+                    ></p-fileUpload>
+                    <small
+                        *ngIf="
+                            formGroup.get('file')?.errors &&
+                            formGroup.get('file')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="col-12 text-right">
+                    <button
+                        pbutton=""
+                        pripple=""
+                        label="Submit"
+                        class="p-element p-ripple p-button p-component button-cancel"
+                        (click)="onCancelBtnClicked($event)"
+                    >
+                        <span class="p-button-label">Cancel</span>
+                    </button>
+
+                    <button
+                        pbutton=""
+                        pripple=""
+                        label="Submit"
+                        class="p-element p-ripple p-button p-component button-save"
+                        (click)="onSaveBtnClicked($event)"
+                    >
+                        <span
+                            class="p-button-icon p-button-icon-left pi pi-save"
+                            aria-hidden="true"
+                        ></span
+                        ><span class="p-button-label">Save</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

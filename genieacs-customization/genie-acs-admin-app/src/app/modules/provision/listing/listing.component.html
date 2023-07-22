@@ -1,0 +1,85 @@
+<p-toast></p-toast>
+<div class="card">
+    <div class="container">
+        <div class="flex row">
+            <div class="flex-1">
+                <h3>Provisions</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="flex row margin-bottom-20">
+            <div class="flex-2">
+                <button
+                    #addNewBtn
+                    pButton
+                    type="button"
+                    class="button m2 p-button-approve-all"
+                    (click)="onAddNewButtonClicked($event)"
+                >
+                    <span
+                        class="pi pi-microsoft p-button-icon p-button-icon-left ng-star-inserted"
+                    ></span>
+                    Add New
+                </button>
+            </div>
+            <div class="flex-auto text-right"></div>
+        </div>
+    </div>
+    <p-table
+        [lazy]="true"
+        (onLazyLoad)="nextPage($event)"
+        [totalRecords]="paginationData.Total"
+        [value]="paginationData.Items"
+        (sortFunction)="customSort($event)"
+        [customSort]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [paginator]="true"
+        [rows]="10"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        dataKey="Id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    >
+        <ng-template pTemplate="header">
+            <tr class="upper-case">
+                <th>Name</th>
+                <th>Script</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-ri="rowIndex">
+            <tr>
+                <td>
+                    {{ item._id }}
+                </td>
+                <td>
+                    {{ item.script.slice(0, 10) }}
+                </td>
+                <td>
+                    <div
+                        class="flex align-items-center justify-content-center gap-2"
+                    >
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-pencil"
+                            (click)="onRowEdit(item)"
+                            class="p-button-text p-button-lg"
+                        ></button>
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-trash"
+                            (click)="onRowDelete(item)"
+                            class="p-button-text p-button-danger p-button-lg p-button-delete"
+                        ></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-confirmDialog [style]="{ width: '50vw' }" appendTo="body"></p-confirmDialog>

@@ -1,0 +1,635 @@
+<p-toast></p-toast>
+<div *ngIf="device" class="card">
+    <div class="container">
+        <div class="flex row">
+            <div class="flex-1">
+                <h3>Device: {{ device["DeviceID.ID"].value[0] }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-12">
+            <div class="card">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field m-0 pb-0 col-12 md:col-6">
+                        <p-calendar
+                            [style]="{ width: '27%' }"
+                            [inputStyle]="{ width: '27%' }"
+                            [(ngModel)]="chartDateRange"
+                            (ngModelChange)="chartDateRangeChanged()"
+                            class="m-0 pb-0"
+                            selectionMode="range"
+                            [readonlyInput]="true"
+                        ></p-calendar>
+                    </div>
+                    <div class="field m-0 pb-0 col-12 md:col-6"></div>
+                    <div class="field m-0 pb-0 col-12 md:col-6">
+                        <div class="field m-0 col-12 md:col-2">
+                            <button
+                                pButton
+                                type="button"
+                                class="button export"
+                                (click)="onExportBtnClicked('throughput')"
+                            >
+                                <span
+                                    class="pi pi-download p-button-icon p-button-icon-left ng-star-inserted"
+                                ></span>
+                                Export
+                            </button>
+                        </div>
+
+                        <p-chart
+                            *ngIf="throughputChartData"
+                            type="line"
+                            [data]="throughputChartData"
+                            [options]="options"
+                        ></p-chart>
+                    </div>
+                    <div class="field m-0 pb-0 col-12 md:col-6">
+                        <div class="field m-0 col-12 md:col-2">
+                            <button
+                                pButton
+                                type="button"
+                                class="button export"
+                                (click)="onExportBtnClicked('traffic')"
+                            >
+                                <span
+                                    class="pi pi-download p-button-icon p-button-icon-left ng-star-inserted"
+                                ></span>
+                                Export
+                            </button>
+                        </div>
+                        <p-chart
+                            *ngIf="byteChartData"
+                            type="line"
+                            [data]="byteChartData"
+                            [options]="options"
+                        ></p-chart>
+                    </div>
+                    <div class="field m-0 pb-0 col-12 md:col-6">
+                        <div class="field m-0 col-12 md:col-2">
+                            <button
+                                pButton
+                                type="button"
+                                class="button export"
+                                (click)="onExportBtnClicked('connection')"
+                            >
+                                <span
+                                    class="pi pi-download p-button-icon p-button-icon-left ng-star-inserted"
+                                ></span>
+                                Export
+                            </button>
+                        </div>
+                        <p-chart
+                            *ngIf="clientConnectionCountChartData"
+                            type="line"
+                            [data]="clientConnectionCountChartData"
+                            [options]="options"
+                        ></p-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex row">
+            <div class="flex-1">
+                <h4>Actions</h4>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-3">
+                        <input
+                            (keyup.enter)="onTagInputEntered($event)"
+                            pInputText
+                            type="text"
+                            placeholder="Type &  Press enter to add new tag"
+                        />
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-10">
+                        <p-chip *ngFor="let tag of tags; let index = index">
+                            <div class="p-2">{{ tag }}</div>
+                            <i
+                                class="pi pi-times-circle"
+                                (click)="onTagDeleted(index)"
+                            ></i>
+                        </p-chip>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field m-0 col-12 md:col-2">
+                        <p-button
+                            label="Reboot"
+                            styleClass="p-button-outlined p-button-secondary"
+                            (click)="onRebootBtnClicked()"
+                        ></p-button>
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-2">
+                        <p-button
+                            label="Factory Reset"
+                            styleClass="p-button-outlined p-button-warning"
+                            (click)="onResetBtnClicked()"
+                        ></p-button>
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-2">
+                        <p-button
+                            label="Push File"
+                            styleClass="p-button-outlined p-button-info"
+                            (click)="onPushFileBtnClicked()"
+                        ></p-button>
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-2">
+                        <p-button
+                            label="Delete"
+                            styleClass="p-button-outlined p-button-danger"
+                            (click)="onDeleteBtnClicked()"
+                        ></p-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex row">
+            <div class="flex-1">
+                <h4>Test Speed</h4>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-2">
+                        <p-button
+                            label="Summon"
+                            styleClass="p-button-outlined p-button-info"
+                            (click)="onSummonBtnClicked($event)"
+                            [disabled]="!!(loadingService.loading$ | async)"
+                        ></p-button>
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-4">
+                        <label class="down">
+                            {{
+                                device["Events.Inform"]?.value[0]
+                                    | ddmmyyyyhhmmss
+                            }}
+                            ({{
+                                device["Events.Inform"]?.value[0]
+                                    | dateTimeAsAgo
+                            }})</label
+                        >
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-2">
+                        <p-button
+                            label="Test Download Speed"
+                            styleClass="p-button-outlined p-button-info"
+                            (click)="onTestDownloadBtnClicked($event)"
+                            [disabled]="
+                                hasNoTestSpeed ||
+                                !!(loadingService.loading$ | async) ||
+                                !selectedDownloadOption
+                            "
+                        ></p-button>
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-3">
+                        <label class="down">
+                            <i class="pi pi-arrow-circle-down"></i>
+                            {{ DownloadSpeed }}</label
+                        >
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-7">
+                        <p-dropdown
+                            optionLabel="text"
+                            [options]="downloadOptions"
+                            [(ngModel)]="selectedDownloadOption"
+                            [disabled]="
+                                hasNoTestSpeed || !downloadOptions.length
+                            "
+                        ></p-dropdown>
+
+                        <!-- http://speedtest.ftp.otenet.gr/files/test1Mb.db -->
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-2">
+                        <p-button
+                            label="Test Upload Speed"
+                            styleClass="p-button-outlined p-button-info"
+                            (click)="onTestUploadBtnClicked($event)"
+                            [disabled]="
+                                hasNoTestSpeed ||
+                                !!(loadingService.loading$ | async) ||
+                                !uploadLink ||
+                                !selectedUploadOption
+                            "
+                        ></p-button>
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-3">
+                        <label class="up">
+                            <i class="pi pi-arrow-circle-up"></i>
+                            {{ UploadSpeed }}</label
+                        >
+                    </div>
+                    <div class="field m-0 pb-0pb-0 col-12 md:col-7">
+                        <p-dropdown
+                            optionLabel="text"
+                            [options]="uploadOptions"
+                            [(ngModel)]="selectedUploadOption"
+                            [disabled]="hasNoTestSpeed || !uploadOptions.length"
+                        ></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="flex row">
+                <div class="flex-1">
+                    <h4>Device Information</h4>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card device-info">
+                    <div class="p-fluid p-formgrid grid">
+                        <div class="field m-0 pb-0 col-12 md:col-6">
+                            <label>MAC Address</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['VirtualParameters.MACAddress'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Last Inform</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['Events.Inform'],
+                                        'value[0]'
+                                    ) | ddmmyyyyhhmmss
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Serial Number</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['DeviceID.SerialNumber'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Product Class</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['DeviceID.ProductClass'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>OUI</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['VirtualParameters.OUI'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Manufacturer</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['DeviceID.Manufacturer'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Software Version</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device[
+                                            'VirtualParameters.SoftwareVersion'
+                                        ],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Hardware Version</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device[
+                                            'VirtualParameters.HardwareVersion'
+                                        ],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>IPV4 Address</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['VirtualParameters.IPV4Address'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>PPPOE User</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['VirtualParameters.PPPoEACName'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                (keyup.enter)="
+                                    onSetParamValue(
+                                        $event,
+                                        'VirtualParameters.PPPoEACName'
+                                    )
+                                "
+                                [disabled]="!!(loadingService.loading$ | async)"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>SSID 2.4G</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['VirtualParameters.SSID24G'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                (keyup.enter)="
+                                    onSetParamValue(
+                                        $event,
+                                        'VirtualParameters.SSID24G'
+                                    )
+                                "
+                                [disabled]="!!(loadingService.loading$ | async)"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>SSID 2.4G Password</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device[
+                                            'VirtualParameters.Ssid24gPassword'
+                                        ],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="password"
+                                (keyup.enter)="
+                                    onSetParamValue(
+                                        $event,
+                                        'VirtualParameters.Ssid24gPassword'
+                                    )
+                                "
+                                [disabled]="!!(loadingService.loading$ | async)"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>SSID 5G</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['VirtualParameters.SSID5G'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                (keyup.enter)="
+                                    onSetParamValue(
+                                        $event,
+                                        'VirtualParameters.SSID5G'
+                                    )
+                                "
+                                [disabled]="!!(loadingService.loading$ | async)"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>SSID 5G Password</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device[
+                                            'VirtualParameters.Ssid24gPasswordSsid24gPassword'
+                                        ],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="password"
+                                (keyup.enter)="
+                                    onSetParamValue(
+                                        $event,
+                                        'VirtualParameters.Ssid5gPassword'
+                                    )
+                                "
+                                [disabled]="!!(loadingService.loading$ | async)"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Tx (dBm)</label>
+                            <label
+                                class="status"
+                                *ngIf="
+                                    calculateTxThroughputStatus ===
+                                    ThroughtputStatuses.Good
+                                "
+                            >
+                                <span class="range good"></span>
+                                <span>Good</span></label
+                            >
+                            <label
+                                class="status"
+                                *ngIf="
+                                    calculateTxThroughputStatus ===
+                                    ThroughtputStatuses.Normal
+                                "
+                            >
+                                <span class="range normal"></span>
+                                <span>Normal</span></label
+                            >
+                            <label
+                                class="status"
+                                *ngIf="
+                                    calculateTxThroughputStatus ===
+                                    ThroughtputStatuses.Bad
+                                "
+                            >
+                                <span class="range bad"></span>
+                                <span>Bad</span></label
+                            >
+                            <label
+                                class="status"
+                                *ngIf="
+                                    calculateTxThroughputStatus ===
+                                    ThroughtputStatuses.NoValue
+                                "
+                            >
+                                <span class="range no-value"></span>
+                                <span>Can't get value</span></label
+                            >
+                            <input
+                                [value]="
+                                    getValue(
+                                        device[
+                                            'VirtualParameters.TxThroughput'
+                                        ],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Rx (dBm)</label>
+                            <label
+                                class="status"
+                                *ngIf="
+                                    calculateRxThroughputStatus ===
+                                    ThroughtputStatuses.Good
+                                "
+                            >
+                                <span class="range good"></span>
+                                <span>Good</span></label
+                            >
+                            <label
+                                class="status"
+                                *ngIf="
+                                    calculateRxThroughputStatus ===
+                                    ThroughtputStatuses.Normal
+                                "
+                            >
+                                <span class="range normal"></span>
+                                <span>Normal</span></label
+                            >
+                            <label
+                                class="status"
+                                *ngIf="
+                                    calculateRxThroughputStatus ===
+                                    ThroughtputStatuses.Bad
+                                "
+                            >
+                                <span class="range bad"></span>
+                                <span>Bad</span></label
+                            >
+                            <label
+                                class="status"
+                                *ngIf="
+                                    calculateRxThroughputStatus ===
+                                    ThroughtputStatuses.NoValue
+                                "
+                            >
+                                <span class="range no-value"></span>
+                                <span>Can't get value</span></label
+                            >
+                            <input
+                                [value]="
+                                    getValue(
+                                        device[
+                                            'VirtualParameters.RxThroughput'
+                                        ],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Bytes Received (Byte)</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device[
+                                            'VirtualParameters.BytesReceived'
+                                        ],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Bytes Sent (Byte)</label>
+                            <input
+                                [value]="
+                                    getValue(
+                                        device['VirtualParameters.BytesSent'],
+                                        'value[0]'
+                                    )
+                                "
+                                pInputText
+                                type="text"
+                                disabled
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-confirmDialog [style]="{ width: '50vw' }" appendTo="body"></p-confirmDialog>

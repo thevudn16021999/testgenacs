@@ -1,0 +1,55 @@
+<div class="col-12">
+    <div class="card">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                <label>File</label>
+                <p-autoComplete
+                    field="_id"
+                    [(ngModel)]="selectedFile"
+                    [suggestions]="filteredFiles"
+                    [dropdown]="true"
+                    [virtualScroll]="true"
+                    (completeMethod)="onFileSearch($event)"
+                ></p-autoComplete>
+                <small *ngIf="!selectedFile" class="p-error block"
+                    >this field is required!</small
+                >
+            </div>
+            <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                <label>File Type</label>
+                <input
+                    *ngIf="selectedFile"
+                    pInputText
+                    type="text"
+                    [value]="selectedFile['metadata.fileType']"
+                    disabled
+                />
+            </div>
+            <div class="col-12 text-right">
+                <button
+                    pbutton=""
+                    pripple=""
+                    label="Submit"
+                    class="p-element p-ripple p-button p-component button-cancel"
+                    (click)="onCancelBtnClicked($event)"
+                >
+                    <span class="p-button-label">Cancel</span>
+                </button>
+
+                <button
+                    pbutton=""
+                    pripple=""
+                    label="Submit"
+                    class="p-element p-ripple p-button p-component button-save"
+                    (click)="onSaveBtnClicked($event)"
+                >
+                    <span
+                        class="p-button-icon p-button-icon-left pi pi-save"
+                        aria-hidden="true"
+                    ></span
+                    ><span class="p-button-label">Save</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

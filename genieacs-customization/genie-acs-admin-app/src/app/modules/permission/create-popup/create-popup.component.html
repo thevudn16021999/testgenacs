@@ -1,0 +1,107 @@
+<div class="col-12">
+    <div class="card">
+        <form [formGroup]="formGroup" (ngSubmit)="onSaveBtnClicked($event)">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field m-0 pb-0pb-0 col-12 md:col-3">
+                    <label>Role</label>
+                    <p-autoComplete
+                        formControlName="role"
+                        [suggestions]="filterRoles"
+                        [virtualScroll]="true"
+                        (completeMethod)="onRoleSearch($event)"
+                    ></p-autoComplete>
+                    <small
+                        *ngIf="
+                            formGroup.get('role')?.errors &&
+                            formGroup.get('role')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-3">
+                    <label>Resource</label>
+                    <p-dropdown
+                        formControlName="resource"
+                        [options]="resources"
+                    ></p-dropdown>
+                    <small
+                        *ngIf="
+                            formGroup.get('resource')?.errors &&
+                            formGroup.get('resource')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-3">
+                    <label>Access</label>
+                    <p-dropdown
+                        formControlName="access"
+                        [options]="accessLevels"
+                        optionLabel="key"
+                    ></p-dropdown>
+                    <small
+                        *ngIf="
+                            formGroup.get('access')?.errors &&
+                            formGroup.get('access')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-3">
+                    <label>API</label>
+                    <br />
+                    <p-checkbox
+                        formControlName="isApi"
+                        [binary]="true"
+                    ></p-checkbox>
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-12">
+                    <label>Filter</label>
+                    <textarea
+                        formControlName="filter"
+                        rows="10"
+                        cols="148"
+                        pInputTextarea
+                    ></textarea>
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-12">
+                    <label>Validate</label>
+                    <textarea
+                        formControlName="validate"
+                        rows="10"
+                        cols="148"
+                        pInputTextarea
+                    ></textarea>
+                </div>
+                <div class="col-12 text-right">
+                    <button
+                        pbutton=""
+                        pripple=""
+                        label="Submit"
+                        class="p-element p-ripple p-button p-component button-cancel"
+                        (click)="onCancelBtnClicked($event)"
+                    >
+                        <span class="p-button-label">Cancel</span>
+                    </button>
+
+                    <button
+                        pbutton=""
+                        pripple=""
+                        label="Submit"
+                        class="p-element p-ripple p-button p-component button-save"
+                        (click)="onSaveBtnClicked($event)"
+                    >
+                        <span
+                            class="p-button-icon p-button-icon-left pi pi-save"
+                            aria-hidden="true"
+                        ></span
+                        ><span class="p-button-label">Save</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

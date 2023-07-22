@@ -1,0 +1,65 @@
+button.p-element.p-button.p-component {
+    width: auto;
+}
+
+button + button {
+    margin-left: 5px;
+}
+
+/* Button 5920 */
+.button-cancel {
+    font-family: Manrope; /* Body */
+    font-size: 14px;
+    line-height: 15px;
+    color: #7d76cfff; /* primary-500 */
+    background: #f4f4fbff; /* primary-100 */
+    opacity: 1;
+    border: none;
+    border-radius: 8px; /* border-xl */
+}
+/* Hover */
+.button-cancel:hover {
+    color: #7d76cfff; /* primary-500 */
+    background: #e5e4f6ff; /* primary-150 */
+}
+/* Pressed */
+.button-cancel:hover:active {
+    color: #7d76cfff; /* primary-500 */
+    background: #d7d4f0ff; /* primary-200 */
+}
+/* Disabled */
+.button-cancel:disabled {
+    opacity: 0.4;
+}
+
+/* Button 5920 */
+.button-save {
+    font-family: Manrope; /* Body */
+    font-size: 14px;
+    line-height: 15px;
+    color: #ffffffff; /* white */
+    background: #7d76cfff; /* primary-500 */
+    opacity: 1;
+    border: none;
+    border-radius: 8px; /* border-xl */
+    gap: 6px;
+}
+.button-save .icon {
+    width: 16px;
+    height: 16px;
+    fill: #ffffffff; /* white */
+}
+/* Hover */
+.button-save:hover {
+    color: #ffffffff; /* white */
+    background: #6960c7ff; /* primary-550 */
+}
+/* Pressed */
+.button-save:hover:active {
+    color: #ffffffff; /* white */
+    background: #5349bfff; /* primary-600 */
+}
+/* Disabled */
+.button-save:disabled {
+    opacity: 0.4;
+}

@@ -1,0 +1,61 @@
+<p-toast></p-toast>
+<div *ngIf="device" class="card">
+    <div class="container">
+        <div class="flex row">
+            <div class="flex-1">
+                <h3>Raw Device Detail: {{ device["DeviceID.ID"].value[0] }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="flex row margin-bottom-20">
+            <div class="flex-2">
+                <span class="p-input-icon-right search"
+                    ><input
+                        #searchInput
+                        type="search"
+                        (keyup)="onSearchTermChanged($event)"
+                        pinputtext=""
+                        placeholder="Search"
+                        class="p-search p-inputtext p-component p-element" /><i
+                        class="pi pi-search"
+                    ></i
+                ></span>
+            </div>
+            <div class="flex-auto text-right"></div>
+        </div>
+    </div>
+    <p-table
+        [value]="filteredDeviceFieldValues"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [tableStyle]="{ 'min-width': '50rem' }"
+    >
+        <ng-template pTemplate="header">
+            <tr class="upper-case">
+                <th>Field Name</th>
+                <th>Value</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-ri="rowIndex">
+            <tr>
+                <td>
+                    {{ item.key }}
+                </td>
+                <td>
+                    <span *ngIf="!item.editable">{{ item.value }}</span>
+                    <input
+                        *ngIf="item.editable"
+                        [value]="item.value"
+                        pInputText
+                        type="text"
+                        (keyup.enter)="onSetParamValue($event, item)"
+                    />
+                </td>
+                <td>
+                    <i class="pi pi-refresh" (click)="fetchParam(item.key)"></i>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

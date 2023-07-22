@@ -1,0 +1,62 @@
+<div class="col-12">
+    <div class="card">
+        <form [formGroup]="formGroup" (ngSubmit)="onSaveBtnClicked($event)">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field m-0 pb-0pb-0 col-12 md:col-4">
+                    <label>Name</label>
+                    <input formControlName="_id" pInputText type="text" />
+                    <small
+                        *ngIf="
+                            formGroup.get('_id')?.errors &&
+                            formGroup.get('_id')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-12">
+                    <label>Content</label>
+                    <textarea
+                        formControlName="value"
+                        rows="30"
+                        cols="150"
+                        pInputTextarea
+                    ></textarea>
+                    <small
+                        *ngIf="
+                            formGroup.get('value')?.errors &&
+                            formGroup.get('value')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="col-12 text-right">
+                    <button
+                        pbutton=""
+                        pripple=""
+                        label="Submit"
+                        class="p-element p-ripple p-button p-component button-cancel"
+                        (click)="onCancelBtnClicked($event)"
+                    >
+                        <span class="p-button-label">Cancel</span>
+                    </button>
+
+                    <button
+                        pbutton=""
+                        pripple=""
+                        label="Submit"
+                        class="p-element p-ripple p-button p-component button-save"
+                        (click)="onSaveBtnClicked($event)"
+                    >
+                        <span
+                            class="p-button-icon p-button-icon-left pi pi-save"
+                            aria-hidden="true"
+                        ></span
+                        ><span class="p-button-label">Save</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

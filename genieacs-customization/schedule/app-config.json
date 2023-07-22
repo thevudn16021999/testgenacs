@@ -1,0 +1,5 @@
+{
+  "interval": "0 */30 * * * *",
+  "mongodbUrl": "mongodb+srv://test01:test01123456@cluster0.bzj83.mongodb.net/?retryWrites=true&w=majority",
+  "retentionInDays": 30
+}

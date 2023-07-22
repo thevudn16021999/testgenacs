@@ -1,0 +1,206 @@
+/* You can add global styles to this file, and also import other style files */
+
+$gutter: 1rem; //for primeflex grid system
+@import "assets/layout/styles/layout/layout.scss";
+
+/* PrimeNG */
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
+
+/* Demos */
+@import "assets/demo/styles/flags/flags.css";
+@import "assets/demo/styles/badges.scss";
+@import "assets/demo/styles/code.scss";
+
+.upper-case {
+    text-transform: uppercase;
+}
+
+.cap-case {
+    text-transform: capitalize;
+}
+
+.lower-case {
+    text-transform: lowercase;
+}
+
+h1,
+h3 {
+    text-transform: uppercase;
+}
+
+.p-button.p-button-link {
+    color: #3f91ed;
+}
+
+.layout-sidebar {
+    width: 178px;
+    border-radius: 0px;
+}
+
+.card {
+    border-radius: 0px;
+}
+
+.layout-menu ul a.active-route {
+    margin-left: 10px;
+    background: #7c78c9;
+    border-radius: 8px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.layout-menu ul a.active-route span {
+    color: #fff;
+}
+
+.layout-menu ul a.active-route i {
+    color: #fff;
+}
+
+.layout-menu ul ul {
+    border-radius: 0px;
+}
+
+.p-calendar-w-btn .p-datepicker-trigger.p-button {
+    background: #7c78c9;
+}
+
+.p-calendar-w-btn .p-datepicker-trigger.p-button span {
+    color: #fff;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+    min-width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: #7c78c9;
+    color: #fff;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+    background: #ecebf7 !important;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 2rem 10px 2rem 10px;
+}
+.table-child.p-datatable .p-datatable-thead > tr > th {
+    background: #f3f4f6 !important;
+    padding: 10px 10px;
+}
+
+.p-paginator {
+    justify-content: right !important;
+}
+
+.p-datatable > .p-datatable-wrapper {
+    border: 1px solid #ecebf6;
+    border-radius: 4px;
+}
+
+.p-datatable .p-paginator-bottom {
+    border-bottom-width: 0px !important;
+}
+
+//MARGIN
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+//BUTTON
+.p-button {
+    //font-family: Manrope; /* Body */
+    line-height: 15px;
+    color: #7d76cfff; /* primary-500 */
+    background: #f4f4fbff; /* primary-100 */
+    opacity: 1;
+    border: none;
+    border-radius: 4px; /* border-xl */
+    font-weight: 500;
+}
+/* Hover */
+.p-button:hover {
+    color: #fff; /* primary-500 */
+    background: #7d76cfff; /* primary-150 */
+}
+/* Pressed */
+.p-button:hover:active {
+    color: #7d76cfff; /* primary-500 */
+    background: #d7d4f0ff; /* primary-200 */
+}
+/* Disabled */
+.p-button:disabled {
+    opacity: 0.4;
+}
+.p-button-new {
+    line-height: 15px;
+    color: #7d76cfff;
+    background: #f4f4fbff;
+    opacity: 1;
+    border: none;
+    border-radius: 4px;
+}
+
+.p-button-new:hover {
+    color: #fff;
+    background: #7d76cfff;
+}
+
+.p-search {
+    line-height: 15px;
+    opacity: 1;
+    border-radius: 4px;
+    width: 337px;
+}
+
+.select-view-all {
+    margin-right: 10px;
+}
+.p-button-delete {
+    margin-left: -10px !important;
+}
+.p-button-today {
+    color: #3f91ed !important;
+    background: #fff !important;
+    border: 1px solid #3f91ed !important;
+}
+.p-button-this-week {
+    color: #7d76cfff !important;
+    background: #fff !important;
+    border: 1px solid #7d76cfff !important;
+}
+
+.p-button-date-range {
+    color: #7d76cfff;
+    border-color: #7d76cfff;
+}
+.p-button-date-range .p-inputtext {
+    min-width: 185px !important;
+}
+.p-button-date-range .p-button span {
+    color: #fff !important;
+}
+.p-calendar .p-datepicker {
+    top: 33px !important;
+    left: -108px !important;
+    input {
+        width: 150px;
+    }
+}
+//POPUP
+.p-dialog .p-dialog-content  .card{
+    border: 0px;
+}
+.p-confirm-dialog-accept{
+    color: white;
+    background: #7d76cf;
+}
+.p-confirm-dialog-accept:hover{
+    background: rgba(63, 81, 181, 0.92)  !important;
+    color: #ffffff !important;
+    border-color: transparent;
+}

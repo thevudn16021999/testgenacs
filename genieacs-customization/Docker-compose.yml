@@ -1,0 +1,46 @@
+# Use this file to pull GenieACS from DockerHub #
+version: "3"
+services:
+# Dockerfile here: https://github.com/docker-library/mongo/blob/6932ac255d29759af9a74c6931faeb02de0fe53e/4.0/Dockerfile
+    mongo:
+        image: b6ad3ef6e5422dedf1ea4583dbe3fc8a6381f64e6902d30b087f8ef92b82724a
+        restart: always
+        container_name: "mongo"
+        environment:
+#            - MONGO_INITDB_ROOT_USERNAME=userchange
+#            - MONGO_INITDB_ROOT_PASSWORD=passwordchange
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/var/log/mongodb
+        volumes:
+            - ./data:/data/db
+        expose:
+            - 27017
+        networks:
+            - genieacs_network
+
+# Dockerfile: https://hub.docker.com/r/drumsergio/genieacs/dockerfile
+    genieacs:
+        depends_on:
+            - 'mongo'
+        image: 8531d1ea2b8f892373e62943c2c4bf942174be0e2d513b48480e42590e4b71a2
+        restart: always
+        container_name: "genieacs"
+        environment:
+            - GENIEACS_UI_JWT_SECRET=changeme
+            - GENIEACS_CWMP_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-cwmp-access.log
+            - GENIEACS_NBI_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-nbi-access.log
+            - GENIEACS_FS_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-fs-access.log
+            - GENIEACS_UI_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-ui-access.log
+            - GENIEACS_DEBUG_FILE=/var/log/genieacs/genieacs-debug.yaml
+            - GENIEACS_EXT_DIR=/opt/genieacs/ext
+            - GENIEACS_MONGODB_CONNECTION_URL=mongodb://mongo/genieacs
+        ports:
+            - "7547:7547"
+            - "7557:7557"
+            - "7567:7567"
+            - "3000:3000"
+            - "4200:4200"
+        volumes:
+            - ./:/genie-acs-admin-app
+        networks:
+            - genieacs_network

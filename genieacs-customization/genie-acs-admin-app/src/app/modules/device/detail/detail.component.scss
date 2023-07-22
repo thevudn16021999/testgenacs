@@ -1,0 +1,52 @@
+p-button button.p-element.p-button.p-component {
+    width: auto;
+}
+label.up,
+label.down {
+    padding-top: 8px;
+    margin-bottom: 0px;
+    font-size: 1.2rem;
+    i {
+        font-size: 1.4rem;
+        color: #1cbfff;
+    }
+}
+label.status {
+    padding-top: 8px;
+    margin-bottom: 0px;
+    font-size: 1.2rem;
+    i {
+        font-size: 1.4rem;
+    }
+    i + span {
+        padding-left: 5px;
+    }
+    span.range {
+        height: 12px;
+        width: 12px;
+        display: inline-block;
+        &.bad {
+            background-color: #ff3300;
+        }
+        &.normal {
+            background-color: #ffcc99;
+        }
+        &.good {
+            background-color: green;
+        }
+        &.no-value {
+            background-color: #000000;
+        }
+    }
+    span + span {
+        padding-left: 5px;
+    }
+}
+label + label {
+    padding-left: 5px;
+}
+p-calendar {
+    input {
+        width: 160px !important;
+    }
+}

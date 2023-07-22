@@ -1,0 +1,512 @@
+<p-toast></p-toast>
+<div *ngIf="formGroup" class="card">
+    <div class="container">
+        <div class="flex row">
+            <div class="flex-1">
+                <h3>Admin Config</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-12">
+            <div class="card">
+                <form
+                    [formGroup]="formGroup"
+                    (ngSubmit)="onSaveBtnClicked($event)"
+                >
+                    <div class="p-fluid p-formgrid grid">
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Dashboard Link</label>
+                            <input
+                                formControlName="dashboardLink"
+                                pInputText
+                                type="text"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('dashboardLink')?.errors &&
+                                    formGroup.get('dashboardLink')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6"></div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Tx Min</label>
+                            <input
+                                formControlName="txThroughputMin"
+                                pInputText
+                                type="number"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('txThroughputMin')?.errors &&
+                                    formGroup.get('txThroughputMin')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Tx Max</label>
+                            <input
+                                formControlName="txThroughputMax"
+                                pInputText
+                                type="number"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('txThroughputMax')?.errors &&
+                                    formGroup.get('txThroughputMax')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Rx Min</label>
+                            <input
+                                formControlName="rxThroughputMin"
+                                pInputText
+                                type="number"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('rxThroughputMin')?.errors &&
+                                    formGroup.get('rxThroughputMin')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Rx Max</label>
+                            <input
+                                formControlName="rxThroughputMax"
+                                pInputText
+                                type="number"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('rxThroughputMax')?.errors &&
+                                    formGroup.get('rxThroughputMax')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 1</label>
+                            <input
+                                formControlName="downloadOptionText01"
+                                pInputText
+                                type="text"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('downloadOptionText01')
+                                        ?.errors &&
+                                    formGroup.get('downloadOptionText01')
+                                        ?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 1</label>
+                            <input
+                                formControlName="downloadOptionLink01"
+                                pInputText
+                                type="url"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('downloadOptionLink01')
+                                        ?.errors &&
+                                    formGroup.get('downloadOptionLink01')
+                                        ?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 2</label>
+                            <input
+                                formControlName="downloadOptionText02"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 2</label>
+                            <input
+                                formControlName="downloadOptionLink02"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 3</label>
+                            <input
+                                formControlName="downloadOptionText03"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 3</label>
+                            <input
+                                formControlName="downloadOptionLink03"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 4</label>
+                            <input
+                                formControlName="downloadOptionText04"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 4</label>
+                            <input
+                                formControlName="downloadOptionLink04"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 5</label>
+                            <input
+                                formControlName="downloadOptionText05"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 5</label>
+                            <input
+                                formControlName="downloadOptionLink05"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 6</label>
+                            <input
+                                formControlName="downloadOptionText06"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 6</label>
+                            <input
+                                formControlName="downloadOptionLink06"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 7</label>
+                            <input
+                                formControlName="downloadOptionText07"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 7</label>
+                            <input
+                                formControlName="downloadOptionLink07"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 8</label>
+                            <input
+                                formControlName="downloadOptionText08"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 8</label>
+                            <input
+                                formControlName="downloadOptionLink08"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 9</label>
+                            <input
+                                formControlName="downloadOptionText09"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 9</label>
+                            <input
+                                formControlName="downloadOptionLink09"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Text 10</label>
+                            <input
+                                formControlName="downloadOptionText10"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Download Option Link 10</label>
+                            <input
+                                formControlName="downloadOptionLink10"
+                                pInputText
+                                type="url"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Ratio</label>
+                            <input
+                                formControlName="uploadRatio"
+                                pInputText
+                                type="text"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('uploadRatio')?.errors &&
+                                    formGroup.get('uploadRatio')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Link</label>
+                            <input
+                                formControlName="uploadLink"
+                                pInputText
+                                type="url"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('uploadLink')?.errors &&
+                                    formGroup.get('uploadLink')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 1</label>
+                            <input
+                                formControlName="uploadOptionText01"
+                                pInputText
+                                type="text"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('uploadOptionText01')
+                                        ?.errors &&
+                                    formGroup.get('uploadOptionText01')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 1</label>
+                            <input
+                                formControlName="uploadOptionSize01"
+                                pInputText
+                                type="number"
+                            />
+                            <small
+                                *ngIf="
+                                    formGroup.get('uploadOptionSize01')
+                                        ?.errors &&
+                                    formGroup.get('uploadOptionSize01')?.touched
+                                "
+                                class="p-error block"
+                                >this field is required!</small
+                            >
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 2</label>
+                            <input
+                                formControlName="uploadOptionText02"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 2</label>
+                            <input
+                                formControlName="uploadOptionSize02"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 3</label>
+                            <input
+                                formControlName="uploadOptionText03"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 3</label>
+                            <input
+                                formControlName="uploadOptionSize03"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 4</label>
+                            <input
+                                formControlName="uploadOptionText04"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 4</label>
+                            <input
+                                formControlName="uploadOptionSize04"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 5</label>
+                            <input
+                                formControlName="uploadOptionText05"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 5</label>
+                            <input
+                                formControlName="uploadOptionSize05"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 6</label>
+                            <input
+                                formControlName="uploadOptionText06"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 6</label>
+                            <input
+                                formControlName="uploadOptionSize06"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 7</label>
+                            <input
+                                formControlName="uploadOptionText07"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 7</label>
+                            <input
+                                formControlName="uploadOptionSize07"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 8</label>
+                            <input
+                                formControlName="uploadOptionText08"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 8</label>
+                            <input
+                                formControlName="uploadOptionSize08"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 9</label>
+                            <input
+                                formControlName="uploadOptionText09"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 9</label>
+                            <input
+                                formControlName="uploadOptionSize09"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Text 10</label>
+                            <input
+                                formControlName="uploadOptionText10"
+                                pInputText
+                                type="text"
+                            />
+                        </div>
+                        <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                            <label>Upload Option Size 10</label>
+                            <input
+                                formControlName="uploadOptionSize10"
+                                pInputText
+                                type="number"
+                            />
+                        </div>
+
+                        <div class="col-12 text-right">
+                            <button
+                                style="width: auto"
+                                pbutton=""
+                                pripple=""
+                                label="Submit"
+                                class="p-element p-ripple p-button p-component button-save"
+                                (click)="onSaveBtnClicked($event)"
+                            >
+                                <span
+                                    class="p-button-icon p-button-icon-left pi pi-save"
+                                    aria-hidden="true"
+                                ></span
+                                ><span class="p-button-label">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

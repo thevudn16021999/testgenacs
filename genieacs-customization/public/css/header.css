@@ -1,0 +1,107 @@
+.icon-button {
+  border: none;
+  background-color: transparent;
+}
+
+.content {
+  width: calc(100vw - 250px);
+  min-height: 100vh;
+  margin-left: 250px;
+  transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+}
+
+.content.full {
+  width: 100%;
+  margin-left: 0;
+}
+
+.header {
+  background-color: #62b1fa;
+  display: flex;
+  align-items: center;
+  height: 80px;
+}
+
+.header button {
+  height: 60px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.header button i {
+  font-size: 30px;
+}
+
+table.table.table-striped thead {
+  background-color: #d9d9d9;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+table.table.table-striped th,
+table.table.table-striped td {
+  border: 0;
+}
+
+.table-content {
+  height: calc(100vh - 280px);
+  overflow-y: auto;
+}
+
+.group-btn {
+  height: 100px;
+}
+
+.btn-w-120 {
+  width: 120px;
+}
+
+.circle-green {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #10c300;
+}
+
+.img-block {
+  width: 80px;
+  height: 80px;
+}
+
+.img-block > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.white-color {
+  color: #fff;
+}
+
+.btn-blue {
+  background-color: #26ace5;
+  color: #fff;
+}
+
+.offcanvas.offcanvas-start {
+  width: 250px;
+}
+
+.icon-size {
+  font-size: 24px;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.background-gray {
+  background-color: #d9d9d9;
+}

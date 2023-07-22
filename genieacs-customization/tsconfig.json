@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2019", "dom"],
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "target": "ES2019",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": true,
+    "allowJs": true
+  },
+  "include": [
+    "./bin/*.ts",
+    "./lib/**/*",
+    "./ui/**/*",
+    "./test/**/*",
+    "./build/**/*"
+  ]
+}

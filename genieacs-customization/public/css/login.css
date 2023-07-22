@@ -1,0 +1,38 @@
+.logo {
+  max-width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.btn-blue {
+  background-color: #26ace5;
+  color: #fff;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+.forgot-password {
+  max-width: 400px;
+}
+
+.pt-200px {
+  padding-top: 200px;
+}
+
+.wrap-text {
+  max-width: 400px;
+}
+
+.tedev {
+  color: red;
+  text-shadow: 2px 2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    -2px -2px 0 #000, 2px 0px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000,
+    0px -2px 0 #000, 2px 2px 2px #000;
+}

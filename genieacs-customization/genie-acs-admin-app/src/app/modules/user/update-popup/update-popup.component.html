@@ -1,0 +1,93 @@
+<div class="col-12">
+    <div class="card">
+        <form [formGroup]="formGroup" (ngSubmit)="onSaveBtnClicked($event)">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                    <label>Username</label>
+                    <input formControlName="username" pInputText type="text" />
+                    <small
+                        *ngIf="
+                            formGroup.get('username')?.errors &&
+                            formGroup.get('username')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                    <label>Roles</label>
+                    <p-multiSelect
+                        formControlName="roles"
+                        [options]="roles"
+                    ></p-multiSelect>
+                    <small
+                        *ngIf="
+                            formGroup.get('roles')?.errors &&
+                            formGroup.get('roles')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                    <label>Password</label>
+                    <p-password
+                        formControlName="password"
+                        [feedback]="false"
+                    ></p-password>
+                    <small
+                        *ngIf="
+                            formGroup.get('password')?.errors &&
+                            formGroup.get('password')?.touched
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+                <div class="field m-0 pb-0pb-0 col-12 md:col-6">
+                    <label>Confirm Password</label>
+                    <p-password
+                        formControlName="confirmPassword"
+                        [feedback]="false"
+                    ></p-password>
+                    <small
+                        *ngIf="
+                            formGroup.get('confirmPassword')?.touched &&
+                            (formGroup.get('confirmPassword')?.errors ||
+                                formGroup.get('confirmPassword')?.value !==
+                                    formGroup.get('password')?.value)
+                        "
+                        class="p-error block"
+                        >this field is required!</small
+                    >
+                </div>
+
+                <div class="col-12 text-right">
+                    <button
+                        pbutton=""
+                        pripple=""
+                        label="Submit"
+                        class="p-element p-ripple p-button p-component button-cancel"
+                        (click)="onCancelBtnClicked($event)"
+                    >
+                        <span class="p-button-label">Cancel</span>
+                    </button>
+
+                    <button
+                        pbutton=""
+                        pripple=""
+                        label="Submit"
+                        class="p-element p-ripple p-button p-component button-save"
+                        (click)="onSaveBtnClicked($event)"
+                    >
+                        <span
+                            class="p-button-icon p-button-icon-left pi pi-save"
+                            aria-hidden="true"
+                        ></span
+                        ><span class="p-button-label">Save</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
